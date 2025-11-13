@@ -20,14 +20,14 @@ const Homepage = () => {
       <div className='flex gap-4'>
         <button
           onClick={ handleModalOpen }
-          className='border px-4 py-2 rounded bg-green-500 text-white hover:bg-green-600'
+          className='border px-4 py-2 rounded bg-green-500 text-white hover:bg-green-600 cursor-pointer'
         >
           Add Expense
         </button>
 
         <button
           onClick={() => navigate('/about')}
-          className='border px-4 py-2 rounded bg-gray-200 hover:bg-gray-300'
+          className='border px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 cursor-pointer'
         >
           About App
         </button>

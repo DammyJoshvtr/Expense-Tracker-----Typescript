@@ -1,0 +1,70 @@
+useEffect(() => {
+  const handleCloseModal = (event: MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      onClose()
+    }
+  }
+
+  document.addEventListener('mousedown', handleCloseModal)
+  return () => document.removeEventListener('mousedown', handleCloseModal)
+}, [onClose])
+
+──────────────────────────────────────────────
+💡 Explanation
+
+1️⃣ Purpose:
+This useEffect closes the modal when the user clicks outside of it.
+It listens for mouse clicks anywhere on the document, and if the click
+does NOT happen inside the modal element, it calls onClose().
+
+──────────────────────────────────────────────
+2️⃣ useEffect(() => { ... }, [onClose])
+- Runs after the component renders.
+- Used for side effects like event listeners.
+- Re-runs only if onClose changes.
+
+──────────────────────────────────────────────
+3️⃣ handleCloseModal function
+Triggered whenever the user clicks on the page.
+
+──────────────────────────────────────────────
+4️⃣ Condition:
+if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+  onClose()
+}
+
+Meaning:
+- modalRef.current → the actual modal DOM element.
+- event.target → the clicked element.
+- .contains() checks if the clicked element is inside the modal.
+
+If it’s not inside → call onClose() to close the modal.
+
+──────────────────────────────────────────────
+5️⃣ Event listener:
+document.addEventListener('mousedown', handleCloseModal)
+→ Watches for all clicks on the page.
+
+──────────────────────────────────────────────
+6️⃣ Cleanup:
+return () => document.removeEventListener('mousedown', handleCloseModal)
+→ Removes the listener when the component unmounts or re-runs.
+→ Prevents memory leaks or multiple triggers.
+
+──────────────────────────────────────────────
+✅ Summary:
+| Line | What it does |
+|------|---------------|
+| useEffect(...) | Runs code after render |
+| handleCloseModal | Detects outside clicks |
+| .contains() | Checks if clicked inside modal |
+| onClose() | Closes modal |
+| addEventListener | Watches clicks |
+| removeEventListener | Cleans up after unmount |
+
+──────────────────────────────────────────────
+Common Use Cases:
+- Modals
+- Dropdowns
+- Popups
+- Sidebars
