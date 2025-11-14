@@ -31,14 +31,23 @@ const AddExpenseModal: React.FC<ModalProps> = ({ onClose }) => {
     return () => document.removeEventListener('mousedown', handleCloseModal)
   }, [onClose])
 
-  // 
-
   const handleSubmitExpense = (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault()
     setAllExpense([...allExpense, {expenseTitle, expenseAmount, expenseDate, expenseDescription} ])
 
-    console.log(allExpense)
+    setExpenseTitle('')
+    setExpenseAmount('')
+    setExpenseDate('')
+    setExpenseDescription('')
+
+    console.log([...allExpense, {expenseTitle, expenseAmount, expenseDate, expenseDescription} ])
   }
+
+  const isFormComplete =
+    !expenseTitle ||
+    !expenseAmount ||
+    !expenseDate ||
+    !expenseDescription
 
   return (
     <div ref={modalRef} className='bg-white p-6 rounded-md shadow-lg w-96'>
@@ -84,7 +93,9 @@ const AddExpenseModal: React.FC<ModalProps> = ({ onClose }) => {
 
         <button
           type='submit'
-          className='bg-blue-500 text-white py-2 rounded hover:bg-blue-600 cursor-pointer'
+          disabled={ isFormComplete }
+          // onClick={() => setExpenseTitle('')}
+          className={` py-2 rounded  ${isFormComplete? 'bg-gray-500 text-white cursor-not-allowed': 'bg-blue-500 text-white hover:bg-blue-600 cursor-pointer'}`}
         >
           Add Expense
         </button>
