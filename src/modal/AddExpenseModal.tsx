@@ -5,11 +5,19 @@ interface ModalProps {
   onClose: () => void
 }
 
+interface Expense {
+  expenseTitle: string,
+  expenseAmount: string,
+  expenseDate: string,
+  expenseDescription: string
+}
+
 const AddExpenseModal: React.FC<ModalProps> = ({ onClose }) => {
   const [expenseTitle, setExpenseTitle] = useState<string>('')
-  const [expenseAmount, setExpenseAmount] = useState<number>(0)
+  const [expenseAmount, setExpenseAmount] = useState<string>('')
   const [expenseDate, setExpenseDate] = useState<string>('')
   const [expenseDescription, setExpenseDescription] = useState<string>('')
+  const [allExpense, setAllExpense] = useState<Expense[]>([]) 
 
   const modalRef = useRef<HTMLDivElement>(null)
 
@@ -23,6 +31,15 @@ const AddExpenseModal: React.FC<ModalProps> = ({ onClose }) => {
     return () => document.removeEventListener('mousedown', handleCloseModal)
   }, [onClose])
 
+  // 
+
+  const handleSubmitExpense = (event: React.SyntheticEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setAllExpense([...allExpense, {expenseTitle, expenseAmount, expenseDate, expenseDescription} ])
+
+    console.log(allExpense)
+  }
+
   return (
     <div ref={modalRef} className='bg-white p-6 rounded-md shadow-lg w-96'>
       <div className='flex justify-between items-center'>
@@ -34,7 +51,7 @@ const AddExpenseModal: React.FC<ModalProps> = ({ onClose }) => {
         />
       </div>
 
-      <form className='flex flex-col gap-4'>
+      <form onSubmit={handleSubmitExpense} className='flex flex-col gap-4'>
         <input
           type='text'
           placeholder='Expense Title'
@@ -47,7 +64,7 @@ const AddExpenseModal: React.FC<ModalProps> = ({ onClose }) => {
           type='number'
           placeholder='Amount ($)'
           value={expenseAmount}
-          onChange={(e) => setExpenseAmount(Number(e.target.value))}
+          onChange={(e) => setExpenseAmount((e.target.value))}
           className='h-12 border-2 px-4 rounded-md'
         />
 

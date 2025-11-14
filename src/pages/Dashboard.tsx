@@ -26,10 +26,10 @@ const Homepage = () => {
         </button>
 
         <button
-          onClick={() => navigate('/about')}
+          onClick={() => navigate('/allexpenses')}
           className='border px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 cursor-pointer'
         >
-          About App
+          All Expenses
         </button>
       </div>
 
