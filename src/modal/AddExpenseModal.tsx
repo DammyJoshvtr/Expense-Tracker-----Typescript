@@ -12,7 +12,7 @@ interface Expense {
   expenseDescription: string
 }
 
-const AddExpenseModal: React.FC<ModalProps> = ({ onClose }) => {
+const AddExpenseModal: React.FC<ModalProps> = ({ onClose,  }) => {
   const [expenseTitle, setExpenseTitle] = useState<string>('')
   const [expenseAmount, setExpenseAmount] = useState<string>('')
   const [expenseDate, setExpenseDate] = useState<string>('')

@@ -4,6 +4,7 @@ import {
   createRoutesFromElements, 
   Route, 
   RouterProvider } from 'react-router-dom'
+import {ExpenseProvider} from '../src/context/ExpenseProvider.tsx'
 import MainLayout from './layouts/MainLayout.tsx'
 import Dashboard from '../src/pages/Dashboard.tsx'
 import AllExpenses from '../src/pages/AllExpenses.tsx'
@@ -19,7 +20,9 @@ const router = createBrowserRouter(
 
 const App = () => {
   return (
-    <RouterProvider router={router} />
+    <ExpenseProvider>
+      <RouterProvider router={router} />
+    </ExpenseProvider>
   )
 }
 

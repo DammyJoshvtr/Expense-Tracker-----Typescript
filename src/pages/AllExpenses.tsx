@@ -1,5 +1,3 @@
-import React from 'react'
-
 const AllExpenses = () => {
   return (
     <section className='p-4'>

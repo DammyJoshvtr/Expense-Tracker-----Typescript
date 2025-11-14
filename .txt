@@ -68,3 +68,12 @@ Common Use Cases:
 - Dropdowns
 - Popups
 - Sidebars
+
+--------------------------------------
+HOW TO CREATE A CONTEXT IN TYPESCIPT
+--------------------------------------
+-> import the necessary Libraries [useContext, createContext, useState] from 'react'
+-> Define Types
+-> Create the CONTEXT [const myContext = createContext<contextType | null(null)]
+-> Provider
+-> Custom Hooks
