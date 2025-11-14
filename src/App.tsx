@@ -4,7 +4,7 @@ import {
   createRoutesFromElements, 
   Route, 
   RouterProvider } from 'react-router-dom'
-import {ExpenseProvider} from '../src/context/ExpenseProvider.tsx'
+import {ExpenseProvider} from './context/ExpenseContext.tsx'
 import MainLayout from './layouts/MainLayout.tsx'
 import Dashboard from '../src/pages/Dashboard.tsx'
 import AllExpenses from '../src/pages/AllExpenses.tsx'
