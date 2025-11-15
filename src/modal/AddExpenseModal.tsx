@@ -6,12 +6,12 @@ interface ModalProps {
   onClose: () => void
 }
 
-interface Expense {
-  expenseTitle: string,
-  expenseAmount: string,
-  expenseDate: string,
-  expenseDescription: string
-}
+// interface Expense {
+//   expenseTitle: string,
+//   expenseAmount: string,
+//   expenseDate: string,
+//   expenseDescription: string
+// }
 
 const AddExpenseModal: React.FC<ModalProps> = ({ onClose,  }) => {
 
@@ -20,7 +20,7 @@ const AddExpenseModal: React.FC<ModalProps> = ({ onClose,  }) => {
   const [expenseAmount, setExpenseAmount] = useState<string>('')
   const [expenseDate, setExpenseDate] = useState<string>('')
   const [expenseDescription, setExpenseDescription] = useState<string>('')
-  const [allExpense, setAllExpense] = useState<Expense[]>([])
+  // const [allExpense, setAllExpense] = useState<Expense[]>([])
 
   const modalRef = useRef<HTMLDivElement>(null)
 
