@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { X } from 'lucide-react'
+import { useExpense } from '../context/ExpenseContext'
 
 interface ModalProps {
   onClose: () => void
@@ -13,11 +14,13 @@ interface Expense {
 }
 
 const AddExpenseModal: React.FC<ModalProps> = ({ onClose,  }) => {
+
+  const {expenses, addExpense} = useExpense()
   const [expenseTitle, setExpenseTitle] = useState<string>('')
   const [expenseAmount, setExpenseAmount] = useState<string>('')
   const [expenseDate, setExpenseDate] = useState<string>('')
   const [expenseDescription, setExpenseDescription] = useState<string>('')
-  const [allExpense, setAllExpense] = useState<Expense[]>([]) 
+  const [allExpense, setAllExpense] = useState<Expense[]>([])
 
   const modalRef = useRef<HTMLDivElement>(null)
 
@@ -33,14 +36,23 @@ const AddExpenseModal: React.FC<ModalProps> = ({ onClose,  }) => {
 
   const handleSubmitExpense = (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setAllExpense([...allExpense, {expenseTitle, expenseAmount, expenseDate, expenseDescription} ])
+    // setAllExpense([...allExpense, {expenseTitle, expenseAmount, expenseDate, expenseDescription} ])
+
+    addExpense({
+      title: expenseTitle,
+      amount: expenseAmount,
+      date: expenseDate,
+      description: expenseDescription
+    })
 
     setExpenseTitle('')
     setExpenseAmount('')
     setExpenseDate('')
     setExpenseDescription('')
 
-    console.log([...allExpense, {expenseTitle, expenseAmount, expenseDate, expenseDescription} ])
+    // console.log([...allExpense, {expenseTitle, expenseAmount, expenseDate, expenseDescription} ])
+
+    console.log([...expenses, {addExpense}])
   }
 
   const isFormComplete =
