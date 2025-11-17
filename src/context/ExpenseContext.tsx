@@ -10,29 +10,32 @@ interface Expense {
 interface ExpenseContextType {
   expenses: Expense[]
   addExpense: (expense: Expense) => void
+  deleteExpense: (index: number) => void
 }
 
 const ExpenseContext = createContext<ExpenseContextType | null>(null)
 
 export const ExpenseProvider = ({ children }: { children: React.ReactNode }) => {
 
-  // Load from localStorage correctly
   const [expenses, setExpenses] = useState<Expense[]>(() => {
     const saved = localStorage.getItem("expenses")
     return saved ? JSON.parse(saved) : []
   })
-  
+
   const addExpense = (expense: Expense) => {
     setExpenses(prev => [...prev, expense])
   }
 
-  // Save to localStorage on change
+  const deleteExpense = (indexToRemove: number) => {
+    setExpenses(prev => prev.filter((_, index) => index !== indexToRemove))
+  }
+
   useEffect(() => {
     localStorage.setItem('expenses', JSON.stringify(expenses))
   }, [expenses])
 
   return (
-    <ExpenseContext.Provider value={{ expenses, addExpense }}>
+    <ExpenseContext.Provider value={{ expenses, addExpense, deleteExpense }}>
       {children}
     </ExpenseContext.Provider>
   )
