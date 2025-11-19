@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useExpense } from "../context/ExpenseContext"
 import { X, ArrowUpDown } from 'lucide-react'
+import TotalCost from "../components/TotalCost"
 
 const AllExpenses = () => {
   const { expenses, deleteExpense } = useExpense()
@@ -25,9 +26,10 @@ const AllExpenses = () => {
 
           <div className="flex items-center gap-2 border rounded-md px-3 py-2 bg-white shadow-sm">
             <span className="text-gray-600 text-sm font-medium flex flex-row items-center gap-2">
-              <ArrowUpDown />
+              <ArrowUpDown size={17} />
               Sort by:</span>
             <select className="focus:outline-none bg-transparent text-sm text-gray-800">
+              <option>All</option>
               <option>Title</option>
               <option>Amount</option>
               <option>Date</option>
@@ -36,8 +38,8 @@ const AllExpenses = () => {
         </div>
 
         {/* Total */}
-        <div className="text-green-700 text-2xl font-semibold">
-          Total: $0
+        <div className="">
+          <TotalCost />
         </div>
       </div>
 
